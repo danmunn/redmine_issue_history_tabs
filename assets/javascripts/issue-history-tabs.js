@@ -3,11 +3,13 @@ Author: Daniel Munn <https://github.com/danmunn
 Date: 23/05/2012
 */
 function init_tabs() {
-  tabComment = $('tab-history_comments');
-  tabAll = $('tab-history_all');
-  tabComment.observe('click', click_comments);
-  tabAll.observe('click', click_all);
-  tabComment.hasClassName('selected') ? show_comments() : show_all();
+  try{
+    tabComment = $('tab-history_comments');
+    tabAll = $('tab-history_all');
+    tabComment.observe('click', click_comments);
+    tabAll.observe('click', click_all);
+    tabComment.hasClassName('selected') ? show_comments() : show_all();
+  }catch(e){};
 }
 
 function show_comments() {
