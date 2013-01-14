@@ -1,3 +1,14 @@
+#history{
+	position: relative;
+}
+
 #history > h3 {
-    display: none;
+	visibility: hidden;
+}
+
+#history > #tabs-scroll{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background: white;
 }
