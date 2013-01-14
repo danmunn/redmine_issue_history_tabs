@@ -10,27 +10,34 @@ function init_tabs(){
     tabComment.observe('click', click_comments);
     tabAll.observe('click', click_all);
     tabComment.hasClassName('selected') ? show_comments() : show_all();
+		tabScroll = {elm: $('tabs-scroll')};
 		
-		a = $('tabs-scroll').cumulativeOffset();
-		
-		tabScroll = {
-			elm: tabScroll = $('tabs-scroll'),
-			left: a.left,
-			top: a.top,
-		};
+		init_scroll_tabs();
 		
 		Event.observe(window, 'scroll', function(){
 			scroll_tabs();
 		});
 		
 		Event.observe(window, 'resize', function(){
-			resize_tabs();
+			init_scroll_tabs();
 		});
-		
-		//Vyvolame je hned ze startu kdyby nahodou
-		scroll_tabs();
-		resize_tabs();
   }catch(e){};
+}
+
+function init_scroll_tabs(){
+	//Reset position, set width
+	tabScroll.elm.setStyle({
+		'position': 'absolute', 'left': '0px',
+		'width': $('content').getLayout().get('width') + 'px'
+	});
+	a = $('tabs-scroll').cumulativeOffset();
+	
+	//Set new values
+	tabScroll.top = a.top;
+	tabScroll.left = a.left;
+	
+	//Call
+	scroll_tabs();
 }
 
 function show_comments() {
@@ -69,10 +76,6 @@ function scroll_tabs(){
 			'position': 'absolute',
 			'left': '0px'
 		});
-}
-
-function resize_tabs(){
-	tabScroll.elm.setStyle({'width': $('content').getLayout().get('width') + 'px'});
 }
 
 var tabAll;
